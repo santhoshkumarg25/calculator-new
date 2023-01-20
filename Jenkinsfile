@@ -21,13 +21,13 @@ pipeline {
 
     stage('Deliver') {
       steps{
-        deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://172.31.87.232:9090/')], contextPath: null, war: 'target/calculator.war'
+        deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://172.31.0.106:9090/')], contextPath: null, war: 'target/calculator.war'
      }
     }
     
     stage('Docker Build') {
       steps {
-        sh 'docker build -t pbeniwal/mycalcwithwar:v$BUILD_NUMBER .'
+        sh 'docker build -t santhoshkumarg25/kar:v$BUILD_NUMBER .'
       }
     }
     
@@ -35,7 +35,7 @@ pipeline {
       steps {
       	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push pbeniwal/mycalcwithwar:v$BUILD_NUMBER'
+          sh 'docker push santhoshkumarg25/kar:v$BUILD_NUMBER'
         }
       }
     }
