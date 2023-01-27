@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: calc-cont
-        image: pbeniwal/calculator:latest
+        image: santhoshkumarg25/jai:latest
         ports:
         - containerPort: 8080
